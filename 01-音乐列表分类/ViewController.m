@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "WYMusicCategoryVC.h"
+#import "WYMusicSearchResultVC.h"
 
 @interface ViewController ()
 
@@ -16,14 +18,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)loadMusicBtnClick:(UIButton *)sender {
+    
+    [self.navigationController pushViewController:[WYMusicCategoryVC new] animated:YES];
+    
 }
-
 
 @end

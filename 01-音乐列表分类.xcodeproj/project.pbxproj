@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E314E65C204EAD7D00091E09 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E314E65A204EAD7D00091E09 /* UIImage+Color.m */; };
+		E3BCC3C0204E9C71006CB8BC /* WYCustomSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCC3BE204E9C71006CB8BC /* WYCustomSearchVC.m */; };
 		E3F59A8B204E79DB00C564C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59A8A204E79DB00C564C3 /* AppDelegate.m */; };
 		E3F59A8E204E79DB00C564C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59A8D204E79DB00C564C3 /* ViewController.m */; };
 		E3F59A91204E79DB00C564C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F59A8F204E79DB00C564C3 /* Main.storyboard */; };
 		E3F59A93204E79DB00C564C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F59A92204E79DB00C564C3 /* Assets.xcassets */; };
 		E3F59A96204E79DB00C564C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F59A94204E79DB00C564C3 /* LaunchScreen.storyboard */; };
 		E3F59A99204E79DB00C564C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59A98204E79DB00C564C3 /* main.m */; };
+		E3F59AA5204E7A8800C564C3 /* WYMusicCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59AA4204E7A8800C564C3 /* WYMusicCategoryVC.m */; };
+		E3F59AA8204E7CE100C564C3 /* WYMusicSearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59AA7204E7CE100C564C3 /* WYMusicSearchResultVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E314E65A204EAD7D00091E09 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
+		E314E65B204EAD7D00091E09 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		E3BCC3BD204E9C71006CB8BC /* WYCustomSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYCustomSearchVC.h; sourceTree = "<group>"; };
+		E3BCC3BE204E9C71006CB8BC /* WYCustomSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYCustomSearchVC.m; sourceTree = "<group>"; };
 		E3F59A86204E79DB00C564C3 /* 01-音乐列表分类.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-音乐列表分类.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F59A89204E79DB00C564C3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3F59A8A204E79DB00C564C3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +34,10 @@
 		E3F59A95204E79DB00C564C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3F59A97204E79DB00C564C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3F59A98204E79DB00C564C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E3F59AA3204E7A8800C564C3 /* WYMusicCategoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicCategoryVC.h; sourceTree = "<group>"; };
+		E3F59AA4204E7A8800C564C3 /* WYMusicCategoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicCategoryVC.m; sourceTree = "<group>"; };
+		E3F59AA6204E7CE100C564C3 /* WYMusicSearchResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicSearchResultVC.h; sourceTree = "<group>"; };
+		E3F59AA7204E7CE100C564C3 /* WYMusicSearchResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicSearchResultVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,7 @@
 		E3F59A88204E79DB00C564C3 /* 01-音乐列表分类 */ = {
 			isa = PBXGroup;
 			children = (
+				E3F59A9F204E7A3B00C564C3 /* Music */,
 				E3F59A89204E79DB00C564C3 /* AppDelegate.h */,
 				E3F59A8A204E79DB00C564C3 /* AppDelegate.m */,
 				E3F59A8C204E79DB00C564C3 /* ViewController.h */,
@@ -69,6 +82,45 @@
 				E3F59A98204E79DB00C564C3 /* main.m */,
 			);
 			path = "01-音乐列表分类";
+			sourceTree = "<group>";
+		};
+		E3F59A9F204E7A3B00C564C3 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				E314E65B204EAD7D00091E09 /* UIImage+Color.h */,
+				E314E65A204EAD7D00091E09 /* UIImage+Color.m */,
+				E3F59AA2204E7A3B00C564C3 /* ViewController */,
+				E3F59AA1204E7A3B00C564C3 /* View */,
+				E3F59AA0204E7A3B00C564C3 /* Model */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
+		E3F59AA0204E7A3B00C564C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E3F59AA1204E7A3B00C564C3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E3F59AA2204E7A3B00C564C3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E3F59AA3204E7A8800C564C3 /* WYMusicCategoryVC.h */,
+				E3F59AA4204E7A8800C564C3 /* WYMusicCategoryVC.m */,
+				E3F59AA6204E7CE100C564C3 /* WYMusicSearchResultVC.h */,
+				E3F59AA7204E7CE100C564C3 /* WYMusicSearchResultVC.m */,
+				E3BCC3BD204E9C71006CB8BC /* WYCustomSearchVC.h */,
+				E3BCC3BE204E9C71006CB8BC /* WYCustomSearchVC.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F59A8E204E79DB00C564C3 /* ViewController.m in Sources */,
+				E3BCC3C0204E9C71006CB8BC /* WYCustomSearchVC.m in Sources */,
 				E3F59A99204E79DB00C564C3 /* main.m in Sources */,
+				E3F59AA8204E7CE100C564C3 /* WYMusicSearchResultVC.m in Sources */,
+				E314E65C204EAD7D00091E09 /* UIImage+Color.m in Sources */,
+				E3F59AA5204E7A8800C564C3 /* WYMusicCategoryVC.m in Sources */,
 				E3F59A8B204E79DB00C564C3 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
