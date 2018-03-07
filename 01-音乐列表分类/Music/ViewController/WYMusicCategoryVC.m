@@ -10,16 +10,23 @@
 #import "WYMusicSearchResultVC.h"
 #import "WYCustomSearchVC.h"
 #import "UIImage+Color.h"
+#import "WYMusicCategoryCell.h"
+#import "WYMusicCell.h"
+#import "WYMusicModel.h"
+#import "WYMusicSelectedCell.h"
 
 #define RGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define RGBALPHA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
 
 CGFloat const kNavBackH = 140; ///< 搜索导航高度
 
-@interface WYMusicCategoryVC ()
+@interface WYMusicCategoryVC ()<UITableViewDataSource, UITableViewDelegate, WYMusicCellDelegate, WYMusicSelectedCellDelegate>
 
 @property (nonatomic, strong) WYCustomSearchVC *searchVC;
 @property (nonatomic, weak) UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray<WYMusicModel *> *dataSource;
+@property (nonatomic, strong) WYMusicModel *currentModel;
 
 @property (nonatomic, assign) CFRunLoopObserverRef observerRef;
 
@@ -30,6 +37,9 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    for (int i = 0; i< 20; i++){
+        [self.dataSource addObject:[WYMusicModel new]];
+    }
     
     [self setupUI];
 }
@@ -147,6 +157,8 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStylePlain];
     self.tableView = tableView;
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     tableView.backgroundColor = [UIColor whiteColor];
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(18, 18)];
@@ -156,6 +168,96 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     
     [view addSubview:tableView];
     [self.view addSubview:view];
+    [self registerCell];
+}
+
+- (void)registerCell {
+    [self.tableView registerClass:[WYMusicCategoryCell class] forCellReuseIdentifier:WYMusicCategoryCellReuseId];
+    [self.tableView registerNib:[UINib nibWithNibName:WYMusicCellReuseId bundle:nil] forCellReuseIdentifier:WYMusicCellReuseId];
+    [self.tableView registerNib:[UINib nibWithNibName:WYMusicSelectedCellReuseId bundle:nil] forCellReuseIdentifier:WYMusicSelectedCellReuseId];
+}
+
+#pragma mark - UITableViewDataSource && UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        WYMusicCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:WYMusicCategoryCellReuseId];
+        return cell;
+    }
+    
+    WYMusicModel *model = self.dataSource[indexPath.row];
+    
+    WYMusicCell *cell = [tableView dequeueReusableCellWithIdentifier:model.cellId];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.model = model;
+    cell.delegate = self;
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return 166;
+    }
+    
+    return self.dataSource[indexPath.row].cellH;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) return;
+
+    WYMusicModel *model = self.dataSource[indexPath.row];
+    
+    if (model.isSelected) { // 点击了已经选中的cell
+        NSLog(@"handle selected cell");
+        return;
+    }
+    
+    if (indexPath.row == self.dataSource.count - 1) { // 最后一行
+        NSLog(@"last row, TODO");
+        model.isOpen = !model.isOpen;
+        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        return;
+    }
+
+    // 刷新下一行
+    model.isOpen = !model.isOpen;
+    
+    [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+
+#pragma mark - WYMusicCellDelegate
+- (void)musicCellClickUseBtn:(WYMusicCell *)cell {
+    cell.model.isSelected = YES;
+    self.currentModel = nil;
+    [self.tableView reloadData];
+    
+    [self.navigationController pushViewController:[UIViewController new] animated:YES];
+}
+
+#pragma mark - WYMusicSelectedCellDelegate
+- (void)musicSelectedCellClickCancelBtn:(WYMusicSelectedCell *)cell {
+    cell.model.isSelected = NO;
+    cell.model.isOpen = NO;
+    
+    self.currentModel = nil;
+    [self.tableView reloadData];
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray<WYMusicModel *> *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray arrayWithCapacity:21];
+        [_dataSource addObject:[WYMusicModel new]];
+    }
+    return _dataSource;
 }
 
 #pragma mark - dealloc

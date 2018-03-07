@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E314E65C204EAD7D00091E09 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E314E65A204EAD7D00091E09 /* UIImage+Color.m */; };
+		E314E665204FD4ED00091E09 /* WYMusicCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E314E664204FD4ED00091E09 /* WYMusicCategoryCell.m */; };
+		E314E669204FD6BE00091E09 /* WYCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E314E667204FD6BE00091E09 /* WYCategoryCell.m */; };
+		E314E66A204FD6BE00091E09 /* WYCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E314E668204FD6BE00091E09 /* WYCategoryCell.xib */; };
+		E3286305204FD8A7007612DC /* WYMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286303204FD8A7007612DC /* WYMusicCell.m */; };
+		E3286306204FD8A7007612DC /* WYMusicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3286304204FD8A7007612DC /* WYMusicCell.xib */; };
+		E328630C204FDF5D007612DC /* WYMusicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E328630B204FDF5D007612DC /* WYMusicModel.m */; };
+		E3286310204FE09B007612DC /* WYMusicSelectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E328630E204FE09B007612DC /* WYMusicSelectedCell.m */; };
+		E3286311204FE09B007612DC /* WYMusicSelectedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E328630F204FE09B007612DC /* WYMusicSelectedCell.xib */; };
 		E3BCC3C0204E9C71006CB8BC /* WYCustomSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BCC3BE204E9C71006CB8BC /* WYCustomSearchVC.m */; };
 		E3F59A8B204E79DB00C564C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59A8A204E79DB00C564C3 /* AppDelegate.m */; };
 		E3F59A8E204E79DB00C564C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F59A8D204E79DB00C564C3 /* ViewController.m */; };
@@ -22,6 +30,19 @@
 /* Begin PBXFileReference section */
 		E314E65A204EAD7D00091E09 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		E314E65B204EAD7D00091E09 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		E314E663204FD4ED00091E09 /* WYMusicCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicCategoryCell.h; sourceTree = "<group>"; };
+		E314E664204FD4ED00091E09 /* WYMusicCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicCategoryCell.m; sourceTree = "<group>"; };
+		E314E666204FD6BE00091E09 /* WYCategoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYCategoryCell.h; sourceTree = "<group>"; };
+		E314E667204FD6BE00091E09 /* WYCategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYCategoryCell.m; sourceTree = "<group>"; };
+		E314E668204FD6BE00091E09 /* WYCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYCategoryCell.xib; sourceTree = "<group>"; };
+		E3286302204FD8A7007612DC /* WYMusicCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicCell.h; sourceTree = "<group>"; };
+		E3286303204FD8A7007612DC /* WYMusicCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicCell.m; sourceTree = "<group>"; };
+		E3286304204FD8A7007612DC /* WYMusicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYMusicCell.xib; sourceTree = "<group>"; };
+		E328630A204FDF5D007612DC /* WYMusicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicModel.h; sourceTree = "<group>"; };
+		E328630B204FDF5D007612DC /* WYMusicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicModel.m; sourceTree = "<group>"; };
+		E328630D204FE09B007612DC /* WYMusicSelectedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYMusicSelectedCell.h; sourceTree = "<group>"; };
+		E328630E204FE09B007612DC /* WYMusicSelectedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYMusicSelectedCell.m; sourceTree = "<group>"; };
+		E328630F204FE09B007612DC /* WYMusicSelectedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WYMusicSelectedCell.xib; sourceTree = "<group>"; };
 		E3BCC3BD204E9C71006CB8BC /* WYCustomSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WYCustomSearchVC.h; sourceTree = "<group>"; };
 		E3BCC3BE204E9C71006CB8BC /* WYCustomSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WYCustomSearchVC.m; sourceTree = "<group>"; };
 		E3F59A86204E79DB00C564C3 /* 01-音乐列表分类.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-音乐列表分类.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +120,8 @@
 		E3F59AA0204E7A3B00C564C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E328630A204FDF5D007612DC /* WYMusicModel.h */,
+				E328630B204FDF5D007612DC /* WYMusicModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -106,6 +129,17 @@
 		E3F59AA1204E7A3B00C564C3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E314E663204FD4ED00091E09 /* WYMusicCategoryCell.h */,
+				E314E664204FD4ED00091E09 /* WYMusicCategoryCell.m */,
+				E314E666204FD6BE00091E09 /* WYCategoryCell.h */,
+				E314E667204FD6BE00091E09 /* WYCategoryCell.m */,
+				E314E668204FD6BE00091E09 /* WYCategoryCell.xib */,
+				E3286302204FD8A7007612DC /* WYMusicCell.h */,
+				E3286303204FD8A7007612DC /* WYMusicCell.m */,
+				E3286304204FD8A7007612DC /* WYMusicCell.xib */,
+				E328630D204FE09B007612DC /* WYMusicSelectedCell.h */,
+				E328630E204FE09B007612DC /* WYMusicSelectedCell.m */,
+				E328630F204FE09B007612DC /* WYMusicSelectedCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,8 +216,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F59A96204E79DB00C564C3 /* LaunchScreen.storyboard in Resources */,
+				E314E66A204FD6BE00091E09 /* WYCategoryCell.xib in Resources */,
 				E3F59A93204E79DB00C564C3 /* Assets.xcassets in Resources */,
 				E3F59A91204E79DB00C564C3 /* Main.storyboard in Resources */,
+				E3286311204FE09B007612DC /* WYMusicSelectedCell.xib in Resources */,
+				E3286306204FD8A7007612DC /* WYMusicCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,12 +232,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F59A8E204E79DB00C564C3 /* ViewController.m in Sources */,
+				E3286305204FD8A7007612DC /* WYMusicCell.m in Sources */,
+				E3286310204FE09B007612DC /* WYMusicSelectedCell.m in Sources */,
+				E328630C204FDF5D007612DC /* WYMusicModel.m in Sources */,
 				E3BCC3C0204E9C71006CB8BC /* WYCustomSearchVC.m in Sources */,
+				E314E669204FD6BE00091E09 /* WYCategoryCell.m in Sources */,
 				E3F59A99204E79DB00C564C3 /* main.m in Sources */,
 				E3F59AA8204E7CE100C564C3 /* WYMusicSearchResultVC.m in Sources */,
 				E314E65C204EAD7D00091E09 /* UIImage+Color.m in Sources */,
 				E3F59AA5204E7A8800C564C3 /* WYMusicCategoryVC.m in Sources */,
 				E3F59A8B204E79DB00C564C3 /* AppDelegate.m in Sources */,
+				E314E665204FD4ED00091E09 /* WYMusicCategoryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
