@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WYMusicSearchResultVC : UIViewController
+@interface WYMusicSearchResultVC : UIViewController <UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @end

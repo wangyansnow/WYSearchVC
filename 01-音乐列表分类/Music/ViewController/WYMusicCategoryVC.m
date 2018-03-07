@@ -9,10 +9,17 @@
 #import "WYMusicCategoryVC.h"
 #import "WYMusicSearchResultVC.h"
 #import "WYCustomSearchVC.h"
-#import <objc/message.h>
 #import "UIImage+Color.h"
 
-@interface WYMusicCategoryVC ()<UISearchResultsUpdating, UISearchBarDelegate, UISearchControllerDelegate, UIViewControllerTransitioningDelegate>
+#import <objc/message.h>
+#import <objc/runtime.h>
+
+#define RGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
+#define RGBALPHA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
+
+CGFloat const kNavBackH = 140; ///< 搜索导航高度
+
+@interface WYMusicCategoryVC ()
 
 @property (nonatomic, strong) WYCustomSearchVC *searchVC;
 @property (nonatomic, weak) UITableView *tableView;
@@ -26,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     [self setupUI];
 }
 
@@ -33,14 +41,36 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     self.title = @"Music";
     
+    [self prepareHeaderBackView];
+    [self prepareNavItem];
     [self prepareTableView];
     [self prepareSearchVC];
-    [self prepareHeaderBackView];
+}
+
+- (void)prepareNavItem {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setImage:[[UIImage imageNamed:@"musiclist_local_icn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    [button setTitle:@"Local" forState:UIControlStateNormal];
+    
+    button.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+    [button addTarget:self action:@selector(localBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    button.frame = CGRectMake(0, 0, 60, 44);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+}
+
+- (void)localBtnClick {
+    NSLog(@"%s", __func__);
 }
 
 - (void)prepareHeaderBackView {
     UIImageView *backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"musiclist_background_img"]];
     backView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 132);
+    backView.backgroundColor = RGB(0xFFD500);
     [self.view addSubview:backView];
 }
 
@@ -49,38 +79,27 @@
     self.searchVC = [[WYCustomSearchVC alloc] initWithSearchResultsController:resultVC];
     [self.searchVC.view addSubview:resultVC.view];
     
-    // 1.Use current view controller to update the search results
-    self.searchVC.searchResultsUpdater = self;
+    // 1.Use resultVC to update the search results
+    self.searchVC.searchResultsUpdater = resultVC;
     
     self.searchVC.searchBar.placeholder = @"Search music/author name.";
-    self.searchVC.searchBar.delegate = self;
-    self.searchVC.delegate = self;
+    self.searchVC.searchBar.delegate = resultVC;
+    self.searchVC.delegate = resultVC;
     
     [self.searchVC.searchBar setBackgroundImage:[UIImage new]];
     self.searchVC.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(3, 0);
-    [self.searchVC.searchBar setPositionAdjustment:UIOffsetMake(50, 0) forSearchBarIcon:UISearchBarIconSearch];
     
-    UITextField *searchField = [self.searchVC.searchBar valueForKey:@"_searchField"];
-    searchField.font = [UIFont systemFontOfSize:17];
-    
-    UIButton *cancelButton = [self.searchVC.searchBar valueForKey:@"_cancelButton"];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        searchField.textColor = [UIColor redColor];
-        [searchField setValue:[UIColor redColor]forKeyPath:@"_placeholderLabel.textColor"];
-        [cancelButton setTitle:@"Close" forState:UIControlStateNormal];
-    });
+    CGFloat offsetX = (self.view.bounds.size.width - 200 - 32) / 2;
+    [self.searchVC.searchBar setPositionAdjustment:UIOffsetMake(offsetX, 0) forSearchBarIcon:UISearchBarIconSearch];
 
-    self.searchVC.searchBar.tintColor = [UIColor yellowColor]; // 取消按钮和文本框光标颜色
+    self.searchVC.searchBar.tintColor = [UIColor blackColor]; // 取消按钮和文本框光标颜色
     
     [self.searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    UIImage *searchImg = [[UIImage imageNamed:@"cheez_search_icn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [self.searchVC.searchBar setImage:searchImg forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     
     [self.searchVC.searchBar sizeToFit];
-
-    
-//    self.searchVC.searchBar setImage:<#(nullable UIImage *)#> forSearchBarIcon:<#(UISearchBarIcon)#> state:<#(UIControlState)#>
     
     
     // 2.Install the search bar
@@ -90,7 +109,6 @@
         
         // 2.2 Set the search bar visible all the time
         self.navigationItem.hidesSearchBarWhenScrolling = NO;
-        
         
         // 2.3 Hide line view
         __weak typeof(self) weakSelf = self;
@@ -111,8 +129,8 @@
     // 3.It is usually good to set the presentation context
     self.definesPresentationContext = YES;
     
-    searchField.textColor = [UIColor redColor];
-    [searchField setValue:[UIColor redColor]forKeyPath:@"_placeholderLabel.textColor"];
+    UITextField *searchField = [self.searchVC.searchBar valueForKey:@"_searchField"];
+    searchField.font = [UIFont systemFontOfSize:14];
 }
 
 - (BOOL)barGroudView:(UIView *)targetView {
@@ -129,54 +147,19 @@
 }
 
 - (void)prepareTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, kNavBackH - 20, self.view.bounds.size.width, self.view.bounds.size.height - kNavBackH + 20)];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:view.bounds style:UITableViewStylePlain];
     self.tableView = tableView;
+    tableView.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:tableView];
-}
-
-#pragma mark - UISearchResultsUpdating
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    NSLog(@"update search result = %@", searchController.searchBar.text);
-}
-
-#pragma mark - UISearchBarDelegate
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"searchBtn click: %d", self.searchVC.isActive);
-
-}
-
-#pragma mark - UISearchControllerDelegate
-- (void)willPresentSearchController:(UISearchController *)searchController {
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(18, 18)];
+    CAShapeLayer *mask = [CAShapeLayer layer];
+    mask.path = path.CGPath;
+    view.layer.mask = mask;
     
-    searchController.view.alpha = 1.0;
-    [searchController.searchBar setPositionAdjustment:UIOffsetMake(0, 0) forSearchBarIcon:UISearchBarIconSearch];
-}
-
-- (void)willDismissSearchController:(UISearchController *)searchController {
-    
-    [searchController.searchBar setPositionAdjustment:UIOffsetMake(50, 0) forSearchBarIcon:UISearchBarIconSearch];
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        searchController.view.alpha = 0;
-    }];
-}
-
-#pragma mark - private
-/// 只有在将要显示searchVC的时候才能拿到值
-- (UIButton *)getSearchCancelBtn {
-    if (self.searchVC.searchBar.subviews.count == 0) {
-        return nil;
-    }
-    
-    NSArray *subViews = self.searchVC.searchBar.subviews[0].subviews;
-    for (UIView *view in subViews) {
-        if([view isKindOfClass:NSClassFromString(@"UINavigationButton")]) {
-            return (UIButton *)view;
-        }
-    }
-
-    return nil;
+    [view addSubview:tableView];
+    [self.view addSubview:view];
 }
 
 #pragma mark - dealloc

@@ -24,4 +24,32 @@
     self.view.backgroundColor = [UIColor brownColor];
 }
 
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"update search result = %@", searchController.searchBar.text);
+    
+}
+
+#pragma mark - UISearchBarDelegate
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"%s", __func__);
+}
+
+#pragma mark - UISearchControllerDelegate
+- (void)willPresentSearchController:(UISearchController *)searchController {
+    
+    searchController.view.alpha = 1.0;
+    [searchController.searchBar setPositionAdjustment:UIOffsetMake(0, 0) forSearchBarIcon:UISearchBarIconSearch];
+}
+
+- (void)willDismissSearchController:(UISearchController *)searchController {
+    
+    CGFloat offsetX = (self.view.bounds.size.width - 200 - 32) / 2;
+    [searchController.searchBar setPositionAdjustment:UIOffsetMake(offsetX, 0) forSearchBarIcon:UISearchBarIconSearch];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        searchController.view.alpha = 0;
+    }];
+}
+
 @end
