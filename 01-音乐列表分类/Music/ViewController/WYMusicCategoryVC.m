@@ -218,18 +218,13 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
         return;
     }
     
-    if (indexPath.row == self.dataSource.count - 1) { // 最后一行
-        NSLog(@"last row, TODO");
-        model.isOpen = !model.isOpen;
-        [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        return;
-    }
-
     // 刷新下一行
     model.isOpen = !model.isOpen;
     
     [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+    if (indexPath.row == self.dataSource.count - 1) { // 最后一行
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 
