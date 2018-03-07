@@ -229,8 +229,13 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 
 - (void)setCurrentModel:(WYMusicModel *)currentModel {
     // 选中的是同一个
+    NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentModel.sequence inSection:0];
     if (_currentModel != nil && [currentModel isEqual:_currentModel]) { // 取消选中
+        
         currentModel.isOpen = NO;
+        WYMusicCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
+        [cell animate:NO];
+        
         [self reloadIndex:currentModel.sequence canScroll:YES];
         _currentModel = nil;
         return;
@@ -238,11 +243,19 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     
     if (_currentModel) { // 取消上一个选中
         _currentModel.isOpen = NO;
-        [self reloadIndex:_currentModel.sequence canScroll:NO];
+        currentModel.isOpen = YES;
+        
+        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:_currentModel.sequence inSection:0];
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:currentModel.sequence inSection:0];
+        
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath1, indexPath2] withRowAnimation:UITableViewRowAnimationFade];
+    } else { // 第一次选中
+        
+        currentModel.isOpen = YES;
+        WYMusicCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
+        [cell animate:YES];
+        [self reloadIndex:currentModel.sequence canScroll:YES];
     }
-    
-    currentModel.isOpen = YES;
-    [self reloadIndex:currentModel.sequence canScroll:YES];
     
     _currentModel = currentModel;
 }

@@ -31,8 +31,6 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
 }
 
 - (void)setModel:(WYMusicModel *)model {
-    [self removeObserver:_model];
-    [self addObserver:model];
     
     // TODO: 模型赋值
     self.detailBottomHCons.constant = model.isOpen ? 117 : 0;
@@ -44,32 +42,6 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
 - (IBAction)useBtnClick:(UIButton *)sender {
     if ([self.delegate respondsToSelector:@selector(musicCellClickUseBtn:)]) {
         [self.delegate musicCellClickUseBtn:self];
-    }
-}
-
-
-#pragma mark - Observer
-- (void)addObserver:(WYMusicModel *)model {
-    if (!model) return;
-    
-    [model addObserver:self forKeyPath:@"isOpen" options:NSKeyValueObservingOptionNew context:nil];
-}
-
-- (void)removeObserver:(WYMusicModel *)model {
-    if (!model) return;
-    
-    [model removeObserver:self forKeyPath:@"isOpen"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-
-    if ([object isEqual:self.model] && [keyPath isEqualToString:@"isOpen"]) {
-
-        BOOL isOpen = [change[NSKeyValueChangeNewKey] boolValue];
-        
-        [self animate:isOpen];
-    } else {
-        NSLog(@"not this model");
     }
 }
 
@@ -85,10 +57,8 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
     }];
 }
 
-
 #pragma mark - dealloc
 - (void)dealloc {
-    [self removeObserver:self.model];
     NSLog(@"♻️ Dealloc %@", NSStringFromClass([self class]));
 }
 
