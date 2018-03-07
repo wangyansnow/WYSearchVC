@@ -229,7 +229,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     // 刷新下一行
     model.isOpen = !model.isOpen;
     
-    [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+    [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

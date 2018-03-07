@@ -77,15 +77,12 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
 - (void)animate:(BOOL)isOpen {
     NSLog(@"isOpen = %d", isOpen);
     self.detailBottomHCons.constant = isOpen ? 117 : 0;
-//    self.useBtn.hidden = NO;
     self.useBtn.hidden = !isOpen;
     
-    self.useBtn.alpha = isOpen ? 0 : 1;
     [UIView animateWithDuration:0.25 animations:^{
         [self layoutIfNeeded];
-        self.useBtn.alpha = isOpen ? 1 : 0;
     } completion:^(BOOL finished) {
-//        self.useBtn.hidden = !isOpen;
+        
     }];
 }
 
