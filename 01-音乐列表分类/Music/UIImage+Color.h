@@ -13,4 +13,6 @@
 + (UIImage *)imageWithColor:(UIColor *)color;
 /// 返回一张可拉伸的图片
 + (instancetype)resizeImageNamed:(NSString *)name;
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 @end

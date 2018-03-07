@@ -11,8 +11,12 @@
 @implementation UIImage (Color)
 /// 返回一张颜色图片
 + (UIImage *)imageWithColor:(UIColor *)color {
-    CGFloat imageW = [UIScreen mainScreen].bounds.size.width - 48;
-    CGFloat imageH = 36;
+    return [self imageWithColor:color size:CGSizeMake(100, 100)];
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
+    CGFloat imageW = size.width;
+    CGFloat imageH = size.height;
     // 1.开启基于位图的图形上下文
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(imageW, imageH), NO, 0.0);
     

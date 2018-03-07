@@ -11,9 +11,6 @@
 #import "WYCustomSearchVC.h"
 #import "UIImage+Color.h"
 
-#import <objc/message.h>
-#import <objc/runtime.h>
-
 #define RGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define RGBALPHA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
 
@@ -42,9 +39,9 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     self.title = @"Music";
     
     [self prepareHeaderBackView];
-    [self prepareNavItem];
     [self prepareTableView];
     [self prepareSearchVC];
+    [self prepareNavItem];
 }
 
 - (void)prepareNavItem {
@@ -95,12 +92,11 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 
     self.searchVC.searchBar.tintColor = [UIColor blackColor]; // 取消按钮和文本框光标颜色
     
-    [self.searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [self.searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(self.view.bounds.size.width - 32, 36)] forState:UIControlStateNormal];
     UIImage *searchImg = [[UIImage imageNamed:@"cheez_search_icn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [self.searchVC.searchBar setImage:searchImg forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     
     [self.searchVC.searchBar sizeToFit];
-    
     
     // 2.Install the search bar
     if ([self.navigationItem respondsToSelector:@selector(setSearchController:)]) {
