@@ -228,6 +228,11 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 }
 
 - (void)setCurrentModel:(WYMusicModel *)currentModel {
+    if (currentModel.isSelected) {
+        NSLog(@"the cell is the in use cell");
+        return;
+    }
+    
     // 选中的是同一个
     NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentModel.sequence inSection:0];
     if (_currentModel != nil && [currentModel isEqual:_currentModel]) { // 取消选中
@@ -279,7 +284,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 #pragma mark - WYMusicCellDelegate
 - (void)musicCellClickUseBtn:(WYMusicCell *)cell {
     cell.model.isSelected = YES;
-    self.currentModel = nil;
+    _currentModel = nil;
     [self.tableView reloadData];
     
     [self.navigationController pushViewController:[UIViewController new] animated:YES];
@@ -290,7 +295,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     cell.model.isSelected = NO;
     cell.model.isOpen = NO;
     
-    self.currentModel = nil;
+    _currentModel = nil;
     [self.tableView reloadData];
 }
 

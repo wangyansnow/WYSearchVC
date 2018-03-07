@@ -13,28 +13,37 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WYCategoryCell">
-            <rect key="frame" x="0.0" y="0.0" width="82" height="66"/>
+            <rect key="frame" x="0.0" y="0.0" width="115" height="103"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="82" height="66"/>
+                <rect key="frame" x="0.0" y="0.0" width="115" height="103"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6g-Os-4g7">
-                        <rect key="frame" x="12" y="38" width="59" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JFo-jT-23Y">
+                        <rect key="frame" x="33.5" y="12" width="48" height="48"/>
+                        <color key="backgroundColor" red="0.78407167170000003" green="0.87154267490000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="S0D-9V-FDe"/>
+                            <constraint firstAttribute="height" constant="48" id="wlr-1J-FSk"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6g-Os-4g7">
+                        <rect key="frame" x="36" y="62" width="43.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xXY-QJ-E4a">
-                        <rect key="frame" x="15" y="0.0" width="49" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </switch>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="JFo-jT-23Y" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Nha-Ou-eng"/>
+                <constraint firstItem="O6g-Os-4g7" firstAttribute="centerX" secondItem="JFo-jT-23Y" secondAttribute="centerX" id="TFb-5I-AhZ"/>
+                <constraint firstItem="JFo-jT-23Y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="jaO-p6-Mg0"/>
+                <constraint firstItem="O6g-Os-4g7" firstAttribute="top" secondItem="JFo-jT-23Y" secondAttribute="bottom" constant="2" id="uan-Ky-zBz"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <size key="customSize" width="82" height="66"/>
-            <point key="canvasLocation" x="50" y="82"/>
+            <size key="customSize" width="115" height="103"/>
+            <point key="canvasLocation" x="66.5" y="100.5"/>
         </collectionViewCell>
     </objects>
 </document>

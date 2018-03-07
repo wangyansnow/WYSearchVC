@@ -32,16 +32,24 @@ NSString *const WYMusicCategoryCellReuseId = @"WYMusicCategoryCell";
     return self;
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setupUI];
+    }
+    return self;
+}
+
 - (void)setupUI {
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    CGFloat w = self.bounds.size.width * 0.25;
-    CGFloat h = (self.bounds.size.height - 8) * 0.5;
+    CGFloat w = [UIScreen mainScreen].bounds.size.width * 0.25;
+    CGFloat h = 79;
     layout.itemSize = CGSizeMake(w, h);
     
     layout.minimumLineSpacing = 0;
     layout.minimumInteritemSpacing = 0;
     
-    UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 8) collectionViewLayout:layout];
+    UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 158) collectionViewLayout:layout];
+    cv.backgroundColor = [UIColor whiteColor];
     cv.delegate = self;
     cv.dataSource = self;
     [cv registerNib:[UINib nibWithNibName:WYCategoryCellReuseId bundle:nil] forCellWithReuseIdentifier:WYCategoryCellReuseId];
