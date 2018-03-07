@@ -37,7 +37,6 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
     // TODO: 模型赋值
     self.detailBottomHCons.constant = model.isOpen ? 117 : 0;
     self.useBtn.hidden = !model.isOpen;
-    model.cell = self;
     
     _model = model;
 }

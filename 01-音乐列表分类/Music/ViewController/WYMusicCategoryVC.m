@@ -190,7 +190,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     }
     
     WYMusicModel *model = self.dataSource[indexPath.row];
-    
+    model.sequence = indexPath.row;
     WYMusicCell *cell = [tableView dequeueReusableCellWithIdentifier:model.cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.model = model;
@@ -218,13 +218,48 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
         return;
     }
     
-    // 刷新下一行
-    model.isOpen = !model.isOpen;
-    
-    [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
     if (indexPath.row == self.dataSource.count - 1) { // 最后一行
-        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        self.currentModel = model;
+        return;
     }
+    
+    // 刷新下一行
+    self.currentModel = model;
+}
+
+- (void)setCurrentModel:(WYMusicModel *)currentModel {
+    // 选中的是同一个
+    if (_currentModel != nil && [currentModel isEqual:_currentModel]) { // 取消选中
+        currentModel.isOpen = NO;
+        [self reloadIndex:currentModel.sequence canScroll:YES];
+        _currentModel = nil;
+        return;
+    }
+    
+    if (_currentModel) { // 取消上一个选中
+        _currentModel.isOpen = NO;
+        [self reloadIndex:_currentModel.sequence canScroll:NO];
+    }
+    
+    currentModel.isOpen = YES;
+    [self reloadIndex:currentModel.sequence canScroll:YES];
+    
+    _currentModel = currentModel;
+}
+
+- (void)reloadIndex:(NSInteger)index canScroll:(BOOL)canScroll {
+    
+    if (index == self.dataSource.count - 1) { //最后一行
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index - 1 inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        if (canScroll) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        return;
+    }
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index + 1 inSection:0];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
