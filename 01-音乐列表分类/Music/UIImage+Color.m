@@ -11,19 +11,21 @@
 @implementation UIImage (Color)
 /// 返回一张颜色图片
 + (UIImage *)imageWithColor:(UIColor *)color {
-    return [self imageWithColor:color size:CGSizeMake(100, 100)];
+    return [self imageWithColor:color size:CGSizeMake(100, 100) isRound:NO];
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size isRound:(BOOL)isRound {
     CGFloat imageW = size.width;
     CGFloat imageH = size.height;
     // 1.开启基于位图的图形上下文
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(imageW, imageH), NO, 0.0);
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, imageW, imageH) cornerRadius:imageH / 2];
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextAddPath(ctx, path.CGPath);
-    CGContextClip(ctx);
+    if (isRound) {
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, imageW, imageH) cornerRadius:imageH / 2];
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextAddPath(ctx, path.CGPath);
+        CGContextClip(ctx);
+    }
     
     // 2.画一个color颜色的矩形框
     [color set];

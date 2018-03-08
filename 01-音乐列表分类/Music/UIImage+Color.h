@@ -14,5 +14,6 @@
 /// 返回一张可拉伸的图片
 + (instancetype)resizeImageNamed:(NSString *)name;
 
-+ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size isRound:(BOOL)isRound;
+
 @end
