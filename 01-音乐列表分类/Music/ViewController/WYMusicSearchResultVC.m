@@ -38,7 +38,7 @@
 #pragma mark - UISearchControllerDelegate
 - (void)willPresentSearchController:(UISearchController *)searchController {
     
-    searchController.view.alpha = 1.0;
+    self.view.alpha = 1.0;
     [searchController.searchBar setPositionAdjustment:UIOffsetMake(0, 0) forSearchBarIcon:UISearchBarIconSearch];
 }
 
@@ -48,7 +48,7 @@
     [searchController.searchBar setPositionAdjustment:UIOffsetMake(offsetX, 0) forSearchBarIcon:UISearchBarIconSearch];
     
     [UIView animateWithDuration:0.25 animations:^{
-        searchController.view.alpha = 0;
+        self.view.alpha = 0;
     }];
 }
 

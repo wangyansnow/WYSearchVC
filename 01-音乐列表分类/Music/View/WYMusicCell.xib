@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WYMusicCell" rowHeight="215" id="KGk-i7-Jjw" customClass="WYMusicCell">
-            <rect key="frame" x="0.0" y="0.0" width="343" height="215"/>
+            <rect key="frame" x="0.0" y="0.0" width="343" height="76"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="343" height="214.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="343" height="75.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RGb-dn-a6W">
@@ -45,27 +45,27 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0O-rh-3eO">
-                        <rect key="frame" x="0.0" y="76" width="343" height="117"/>
+                        <rect key="frame" x="0.0" y="76" width="343" height="0.0"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0w3-Ko-wzX">
-                                <rect key="frame" x="10" y="0.0" width="293" height="117"/>
+                                <rect key="frame" x="10" y="0.0" width="293" height="0.0"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3AQ-9W-ndJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="117"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="96.5" height="0.0"/>
                                         <color key="backgroundColor" red="0.78407167170000003" green="0.87154267490000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a6k-LB-P9a">
-                                        <rect key="frame" x="98.5" y="0.0" width="96" height="117"/>
+                                        <rect key="frame" x="98.5" y="0.0" width="96" height="0.0"/>
                                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="shk-F1-Z4w">
-                                        <rect key="frame" x="196.5" y="0.0" width="96.5" height="117"/>
+                                        <rect key="frame" x="196.5" y="0.0" width="96.5" height="0.0"/>
                                         <color key="backgroundColor" red="1" green="0.83529411760000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="musiclist_next_icn" translatesAutoresizingMaskIntoConstraints="NO" id="a5S-bB-iup">
-                                <rect key="frame" x="318" y="47.5" width="13" height="23"/>
+                                <rect key="frame" x="318" y="-11" width="13" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="13" id="Pbj-eR-lwe"/>
                                 </constraints>
@@ -76,7 +76,7 @@
                             <constraint firstItem="0w3-Ko-wzX" firstAttribute="leading" secondItem="K0O-rh-3eO" secondAttribute="leading" constant="10" id="6LQ-sz-qYh"/>
                             <constraint firstAttribute="bottom" secondItem="0w3-Ko-wzX" secondAttribute="bottom" id="9v8-yD-BAi"/>
                             <constraint firstItem="a5S-bB-iup" firstAttribute="leading" secondItem="0w3-Ko-wzX" secondAttribute="trailing" constant="15" id="Cxn-Yf-BKY"/>
-                            <constraint firstAttribute="height" constant="117" id="E77-VD-KyX"/>
+                            <constraint firstAttribute="height" id="E77-VD-KyX"/>
                             <constraint firstItem="a5S-bB-iup" firstAttribute="centerY" secondItem="K0O-rh-3eO" secondAttribute="centerY" id="O1i-EK-2IC"/>
                             <constraint firstAttribute="trailing" secondItem="a5S-bB-iup" secondAttribute="trailing" constant="12" id="Weo-zi-CWl"/>
                             <constraint firstItem="0w3-Ko-wzX" firstAttribute="top" secondItem="K0O-rh-3eO" secondAttribute="top" id="z5f-nu-rds"/>

@@ -68,6 +68,15 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:16]}];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backItemClick)];
+}
+
+- (void)backItemClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)localBtnClick {
@@ -111,15 +120,16 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     // 2.Install the search bar
     if ([self.navigationItem respondsToSelector:@selector(setSearchController:)]) {
         // 2.1 For iOS 11 and later, wo place the search bar in the navigation bar
-        self.navigationItem.searchController = self.searchVC;
-        
-        // 2.2 Set the search bar visible all the time
-        self.navigationItem.hidesSearchBarWhenScrolling = NO;
-        
+        if (@available(iOS 11.0, *)) {
+            self.navigationItem.searchController = self.searchVC;
+            // 2.2 Set the search bar visible all the time
+            self.navigationItem.hidesSearchBarWhenScrolling = NO;
+        }
+
         // 2.3 Hide line view
         __weak typeof(self) weakSelf = self;
         self.observerRef = CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopAllActivities, true, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
-            
+
             NSLog(@"kCFRunLoopBeforeWaiting");
             BOOL targetView = [weakSelf barGroudView:weakSelf.navigationController.view];
             if (targetView) {
@@ -127,9 +137,13 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
             }
         });
         CFRunLoopAddObserver(CFRunLoopGetMain(), self.observerRef, kCFRunLoopDefaultMode);
-        
+
     } else {
-        self.tableView.tableHeaderView = self.searchVC.searchBar;
+        UIView *v = [[UIView alloc] initWithFrame:self.searchVC.searchBar.bounds];
+        v.frame = CGRectMake(v.frame.origin.x, 64, v.frame.size.width, v.frame.size.height);
+        [v addSubview:self.searchVC.searchBar];
+        
+        [self.view addSubview:v];
     }
     
     // 3.It is usually good to set the presentation context
@@ -159,6 +173,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     self.tableView = tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.estimatedRowHeight = 76;
     tableView.backgroundColor = [UIColor whiteColor];
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(18, 18)];
@@ -228,19 +243,9 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 }
 
 - (void)setCurrentModel:(WYMusicModel *)currentModel {
-    if (currentModel.isSelected) {
-        NSLog(@"the cell is the in use cell");
-        return;
-    }
-    
     // 选中的是同一个
-    NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:currentModel.sequence inSection:0];
     if (_currentModel != nil && [currentModel isEqual:_currentModel]) { // 取消选中
-        
         currentModel.isOpen = NO;
-        WYMusicCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
-        [cell animate:NO];
-        
         [self reloadIndex:currentModel.sequence canScroll:YES];
         _currentModel = nil;
         return;
@@ -248,19 +253,12 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     
     if (_currentModel) { // 取消上一个选中
         _currentModel.isOpen = NO;
-        currentModel.isOpen = YES;
-        
-        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:_currentModel.sequence inSection:0];
-        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:currentModel.sequence inSection:0];
-        
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath1, indexPath2] withRowAnimation:UITableViewRowAnimationFade];
-    } else { // 第一次选中
-        
-        currentModel.isOpen = YES;
-        WYMusicCell *cell = [self.tableView cellForRowAtIndexPath:currentIndexPath];
-        [cell animate:YES];
-        [self reloadIndex:currentModel.sequence canScroll:YES];
+        NSInteger sequence = MAX(_currentModel.sequence, currentModel.sequence);
+        [self reloadIndex:sequence canScroll:NO];
     }
+    
+    currentModel.isOpen = YES;
+    [self reloadIndex:currentModel.sequence canScroll:YES];
     
     _currentModel = currentModel;
 }
@@ -276,7 +274,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
         return;
     }
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index + 1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class WYMusicCell;
 @interface WYMusicModel : NSObject
 
 @property (nonatomic, assign) BOOL isSelected;
@@ -17,5 +18,6 @@
 @property (nonatomic, assign) CGFloat cellH;
 @property (nonatomic, assign) NSInteger sequence;
 
+@property (nonatomic, weak) WYMusicCell *cell;
 
 @end

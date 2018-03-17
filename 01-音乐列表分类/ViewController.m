@@ -19,13 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
 - (IBAction)loadMusicBtnClick:(UIButton *)sender {
+    WYMusicCategoryVC *musicVC = [WYMusicCategoryVC new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:musicVC];
     
-    [self.navigationController pushViewController:[WYMusicCategoryVC new] animated:YES];
+    [self presentViewController:nav animated:YES completion:nil];
+//    [self.navigationController pushViewController:[WYMusicCategoryVC new] animated:YES];
     
 }
 

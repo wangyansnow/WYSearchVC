@@ -18,11 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    self.view.backgroundColor = [UIColor orangeColor];
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 200, 100, 40)];
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
+//    self.view.backgroundColor = [UIColor orangeColor];
+//
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 200, 100, 40)];
+//    view.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:view];
     
 }
 

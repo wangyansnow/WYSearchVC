@@ -36,7 +36,22 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
     self.detailBottomHCons.constant = model.isOpen ? 117 : 0;
     self.useBtn.hidden = !model.isOpen;
     
+    if (model.cell) {
+        [model removeObserver:model.cell forKeyPath:@"isOpen"];
+        model.cell = nil;
+    }
+    
+    [model addObserver:self forKeyPath:@"isOpen" options:NSKeyValueObservingOptionNew context:nil];
+    model.cell = self;
+    
     _model = model;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"isOpen"]) {
+        BOOL isOpen = [change[NSKeyValueChangeNewKey] boolValue];
+        [self animate:isOpen];
+    }
 }
 
 - (IBAction)useBtnClick:(UIButton *)sender {
@@ -59,6 +74,7 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
 
 #pragma mark - dealloc
 - (void)dealloc {
+    [_model removeObserver:self forKeyPath:@"isOpen"];
     NSLog(@"♻️ Dealloc %@", NSStringFromClass([self class]));
 }
 
