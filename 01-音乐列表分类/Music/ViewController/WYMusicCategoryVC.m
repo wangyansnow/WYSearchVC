@@ -173,7 +173,7 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     self.tableView = tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 76;
+    self.tableView.estimatedRowHeight = 203;
     tableView.backgroundColor = [UIColor whiteColor];
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(18, 18)];

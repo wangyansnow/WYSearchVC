@@ -74,7 +74,10 @@ NSString *const WYMusicCellReuseId = @"WYMusicCell";
 
 #pragma mark - dealloc
 - (void)dealloc {
-    [_model removeObserver:self forKeyPath:@"isOpen"];
+    if (_model.cell) {
+        [_model removeObserver:_model.cell forKeyPath:@"isOpen"];
+        _model.cell = nil;
+    }
     NSLog(@"♻️ Dealloc %@", NSStringFromClass([self class]));
 }
 
