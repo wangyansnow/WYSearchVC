@@ -42,6 +42,8 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     }
     
     [self setupUI];
+    
+    
 }
 
 - (void)setupUI {

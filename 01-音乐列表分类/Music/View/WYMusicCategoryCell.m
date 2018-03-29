@@ -58,6 +58,8 @@ NSString *const WYMusicCategoryCellReuseId = @"WYMusicCategoryCell";
     [self addSubview:cv];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    self.separatorInset = UIEdgeInsetsMake(0, 375, 0, 0);
 }
 
 #pragma mark - UICollectionViewDataSource && UICollectionViewDelegate
