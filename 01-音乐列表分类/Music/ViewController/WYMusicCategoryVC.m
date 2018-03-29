@@ -18,7 +18,8 @@
 #define RGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #define RGBALPHA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
 
-CGFloat const kNavBackH = 140; ///< 搜索导航高度
+#define kNavBackH (self.view.bounds.size.height == 812 ? 164 : 140)
+//CGFloat const kNavBackH = 140; ///< 搜索导航高度
 
 @interface WYMusicCategoryVC ()<UITableViewDataSource, UITableViewDelegate, WYMusicCellDelegate, WYMusicSelectedCellDelegate>
 
@@ -87,7 +88,8 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
 
 - (void)prepareHeaderBackView {
     UIImageView *backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"musiclist_background_img"]];
-    backView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 132);
+    CGFloat h = self.view.bounds.size.height == 812 ? 156 : 132;
+    backView.frame = CGRectMake(0, 0, self.view.bounds.size.width, h);
     backView.backgroundColor = RGB(0xFFD500);
     [self.view addSubview:backView];
 }
@@ -99,21 +101,29 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     
     // 1.Use resultVC to update the search results
     self.searchVC.searchResultsUpdater = resultVC;
-    
-    self.searchVC.searchBar.placeholder = @"Search music/author name.";
     self.searchVC.searchBar.delegate = resultVC;
     self.searchVC.delegate = resultVC;
     
+    // 1.设置placeholder
+    self.searchVC.searchBar.placeholder = @"Search music/author name.";
+    
+    // 2.设置searchBar的背景透明
     [self.searchVC.searchBar setBackgroundImage:[UIImage new]];
     self.searchVC.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    // 3.设置搜索框文字的偏移
     self.searchVC.searchBar.searchTextPositionAdjustment = UIOffsetMake(3, 0);
     
+    // 4.设置搜索框图标的偏移
     CGFloat offsetX = (self.view.bounds.size.width - 200 - 32) / 2;
     [self.searchVC.searchBar setPositionAdjustment:UIOffsetMake(offsetX, 0) forSearchBarIcon:UISearchBarIconSearch];
 
-    self.searchVC.searchBar.tintColor = [UIColor blackColor]; // 取消按钮和文本框光标颜色
+    // 5.取消按钮和文本框光标颜色
+    self.searchVC.searchBar.tintColor = [UIColor blackColor];
     
+    // 6.设置搜索文本框背景图片 [圆形的文本框只需要设置一张圆角图片就可以了]
     [self.searchVC.searchBar setSearchFieldBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(self.view.bounds.size.width - 32, 36) isRound:YES] forState:UIControlStateNormal];
+    // 7.设置搜索按钮
     UIImage *searchImg = [[UIImage imageNamed:@"cheez_search_icn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [self.searchVC.searchBar setImage:searchImg forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
     
@@ -151,7 +161,11 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     // 3.It is usually good to set the presentation context
     self.definesPresentationContext = YES;
     
+    // 8.拿到搜索文本框
     UITextField *searchField = [self.searchVC.searchBar valueForKey:@"_searchField"];
+    // 9.设置取消按钮文字
+    [self.searchVC.searchBar setValue:@"Custom Cancel" forKey:@"_cancelButtonText"];
+    
     searchField.font = [UIFont systemFontOfSize:14];
 }
 
@@ -175,7 +189,9 @@ CGFloat const kNavBackH = 140; ///< 搜索导航高度
     self.tableView = tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.estimatedRowHeight = 203;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     tableView.backgroundColor = [UIColor whiteColor];
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(18, 18)];
